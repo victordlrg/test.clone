@@ -1,0 +1,24 @@
+name: Xygeni Scan
+on:
+  workflow_dispatch:  # Allows manual triggering
+  # no push triggers
+  schedule:
+    - cron: '22 23 * * *'
+
+jobs:
+  xygeni-scan:
+    name: Xygeni Scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # Shallow clones should be disabled for better relevancy of analysis
+
+      - name: Xygeni-Scanner
+        uses: xygeni/xygeni-action@v2.1
+        id: Xygeni-Scanner
+        with:
+          xygeni_url: https://localhost/deps-doctor-service
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          XYGENI_TOKEN: ${{ secrets.XYGENI_TOKEN }}
