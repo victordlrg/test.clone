@@ -3,9 +3,9 @@ on:
   workflow_dispatch:  # Allows manual triggering
   push:
     branches:
-      - xygeni-scan-setup  # default branch name
+      - main  # Or your default branch name
   schedule:
-    - cron: '22 0 * * 6'  # scheduled weekly at 22pm on Friday
+    - cron: '22 0 * * 0'  # scheduled weekly at 22pm on Sunday
 
 jobs:
   xygeni-scan:
