@@ -1,7 +1,8 @@
 name: Xygeni Scan
 on:
   workflow_dispatch:  # Allows manual triggering
-  push:
+  # no push triggers
+  pull_request:
     branches:
       - main
   # no schedule triggers
@@ -16,10 +17,8 @@ jobs:
           fetch-depth: 0  # Shallow clones should be disabled for better relevancy of analysis
 
       - name: Xygeni-Scanner
-        uses: xygeni/xygeni-action@v2.1
+        uses: xygeni/xygeni-action@v3.2.0
         id: Xygeni-Scanner
         with:
           xygeni_url: localhost:8086
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          XYGENI_TOKEN: ${{ secrets.XYGENI_TOKEN }}
+          token: ${{ secrets.XYGENI_TOKEN }}
